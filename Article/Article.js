@@ -2,6 +2,13 @@
 /* Look over this data, then proceed to line 91*/
 const data = [
   {
+    title: 'Source: Programmer Elevates to God-Like Status',
+    date: 'Dec 4th, 2019',
+    firstParagraph: `Asher Kobin can control world events from his thoughts using JavaScript.`,
+    secondParagraph: `Pennies.forEach(Penny) => { Penny.Vaule = '$100' }`,
+    thirdParagraph: `The source of this artile is Asher Kobin`
+  },
+  {
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -88,27 +95,74 @@ const data = [
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+  // Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  // <div class="article">
+  //   <h2>{title of the article}</h2>
+  //   <p class="date">{date of the article}</p>
 
-    {three separate paragraph elements}
+  //   {three separate paragraph elements}
 
-    <span class='expandButton'></span>
-  </div>
+  //   <span class='expandButton'></span>
+  // </div>
 
-  Hint: You will need to use createElement more than once here!
+  function createArticle(title, date, part1, part2, part3) {
+    const articleElem = document.createElement("div");
+    const titleElem = document.createElement("h2");
+    const dateElem = document.createElement("p");
+    const part1Elem = document.createElement("p");
+    const part2Elem = document.createElement("p");
+    const part3Elem = document.createElement("p");
+    const buttonElem = document.createElement("span");
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+    titleElem.textContent = title;
+    dateElem.textContent = date;
+    part1Elem.textContent = part1;
+    part2Elem.textContent = part2;
+    part3Elem.textContent = part3;
+    buttonElem.textContent = "\u25BC";
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+    articleElem.classList.add("article");
+    dateElem.classList.add("date");
+    buttonElem.classList.add("expandButton");
 
-  Step 3: return the entire component.
+    articleElem.appendChild(titleElem);
+    articleElem.appendChild(dateElem);
+    articleElem.appendChild(part1Elem);
+    articleElem.appendChild(part2Elem);
+    articleElem.appendChild(part3Elem);
+    articleElem.appendChild(buttonElem);
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+    buttonElem.addEventListener("click", (e) => {
+      articleElem.classList.toggle("article-open");
+    });
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+    return articleElem;
+  }
+  const articleContainer = document.querySelector("div.articles");
+  
+  data.forEach(articleData => {
+    articleContainer.appendChild(
+      createArticle(
+        articleData.title,
+        articleData.date,
+        articleData.firstParagraph,
+        articleData.secondParagraph,
+        articleData.thirdParagraph
+    ));
+  });
 
-*/
+
+  // Hint: You will need to use createElement more than once here!
+
+  // Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+
+  // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+
+  // Step 3: return the entire component.
+
+  // Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+
+  // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+
